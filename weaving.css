@@ -21,11 +21,17 @@ input, select {
     font-family: Georgia, Times, "Times New Roman", serif;
     font-size: 16pt;
     color: #7C7C7C;
-    border: 0px;
 }
 
+select {
+    border: 0px;
+}
 input {
-    text-align: right;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom: 1px solid #7C7C7C;
+    text-align: center;
 }
 
 .inputs, .outputs {
