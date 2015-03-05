@@ -1,0 +1,143 @@
+body {
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-size: 16pt;
+    color: #57007F;
+    background-color: white;
+    background-image: url("stripes.png");
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+}
+
+
+input, select {
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-size: 16pt;
+    color: #7C7C7C;
+    border: 0px;
+}
+
+input {
+    text-align: right;
+}
+
+.inputs, .outputs {
+    padding: 2px 30px; 
+    border: 2px solid;
+    border-color: #E2C9EF;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+}
+
+.output-matrix {
+    padding: 23px 30px; 
+    border: 2px solid;
+    border-color: #E2C9EF;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+}
+
+.output-matrix table, .output-matrix tr, .output-matrix td {
+    border: 1px solid #57007F;
+    border-collapse: collapse;
+    padding: 2px;
+}
+
+.output-matrix tr:nth-child(even) {
+    background-color: #E8DEED;
+}
+
+.outputs {
+    font-size: 20pt;
+}
+
+.input-container {
+    position: absolute;
+    left: 0%;
+    top: 7%;
+    width: 50%;
+    padding: 10px 5px 10px 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+}    
+
+.output-container {
+    position: absolute;
+    left: 50%;
+    top: 7%;
+    width: 50%;
+    padding: 10px 10px 10px 5px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+}    
+
+.menubar {
+    position: absolute;
+    height: 7%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    border: 2px;
+    border-color: black;
+    border-collapse: collapse;
+    margin: 0;
+    background-color: #E2C9EF;
+    color: black;
+    text-align: center;
+    font-size: 16pt;
+}
+
+.menubox {
+    width: 25%;
+    text-align: center;
+}
+
+.extra_info {
+    font-size: 12pt;
+    color: #A5A5A5;
+}
+
+.error {
+    color: #FF0000;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* http://stackoverflow.com/questions/1309055/cross-browser-way-to-flip-html-image-via-javascript-css */
+.flip-vertical {
+    -moz-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    transform: scaleY(-1);
+    -ms-filter: flipv; /*IE*/
+    filter: flipv;
+}
+
+.more {
+    text-align: right;
+    color: #7C7C7C;
+}
+
+.num {
+    color: #7C7C7C;
+}
+
+.note {
+    font-size: 12pt;
+    color: #7C7C7C;
+    text-align: center;
+    border: 1px solid #7C7C7C;
+}

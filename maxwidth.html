@@ -1,0 +1,101 @@
+<html><title>Weaving width calculator</title>
+<head>
+<script src="weaving.js"></script>
+<link rel="stylesheet" type="text/css" href="weaving.css" />
+<meta charset="ASCII">
+</head>
+<body onload="calculateAll(calculateWeft)">
+
+<table class="menubar"><tr><td class="menubox"><a href="index.html">Maximum Length</a></td>
+<td class="menubox"><u>Maximum Width</u></td>
+<td class="menubox"><a href="howmuch.html">How Much Yarn?</a></td>
+<td class="menubox"><a href="matrix.html">Suggest Some Fabric Sizes</a></td></tr></table>
+
+<div class="input-container">
+<div class="inputs"><p>Available yarn: <input id="_yardage" onchange="changeOutputs('yardage', calculateWeft)" value=1000 size=4><input id="yardage" type="hidden" value=0>
+<select name="yardage_unit" id="yardage_unit">
+<option value="yards" selected="selected">yards</option>
+<option value="meters">meters</option>
+<option value="feet">feet</option>
+<option value="inches">inches</option>
+<option value="cm">cm</option>
+</select><div id="yardage_err" class="error"></div></p>
+
+
+<p>Desired length: <input id="_length" onchange="changeOutputs('length', calculateWeft)" value=8 size=4><input id="length" type="hidden" value=0>
+<select name="length_unit" id="length_unit">
+<option value="yards">yards</option>
+<option value="meters">meters</option>
+<option value="feet" selected="selected">feet</option>
+<option value="inches">inches</option>
+<option value="cm">cm</option>
+</select><div id="length_err" class="error"></div></p>
+
+<p><input id="_dent" onchange="changeInverseOutputs('dent', calculateWeft)" value=8 size=1><input id="dent" type="hidden" value=0> warp ends per <select name="dent_unit" id="dent_unit">
+<option value="yards" selected="selected">yard</option>
+<option value="meters">meter</option>
+<option value="feet">foot</option>
+<option value="inches" selected="selected">inch</option>
+<option value="cm">cm</option>
+</select><input type="checkbox" name="use_two_dents" value="use_two_dents" id="use_two_dents" onclick="toggleDentWeft(calculateWeft)"><span style="font-size: smaller">Different for weft?</span> <div id="dent_err" class="error"></div></p>
+
+<p id="dent_weft_par" class="hidden"><input id="_dent_weft" onchange="changeInverseOutputs('dent_weft', calculateWeft)" value=8 size=1><input id="dent_weft" type="hidden" value=8> weft ends per <select name="dent_weft_unit" id="dent_weft_unit">
+<option value="yards">yard</option>
+<option value="meters">meter</option>
+<option value="feet">foot</option>
+<option value="inches" selected="selected">inch</option>
+<option value="cm">cm</option>
+</select><div id="dent_weft_err" class="error"></div></p>
+
+<p>Fringe: <input id="_fringe" onchange="changeOutputsAndStatus('fringe', calculateWeft)" value=4 size=1><input id="fringe" type="hidden" value=0.> <select name="fringe_unit" id="fringe_unit">
+<option value="yards">yards</option>
+<option value="meters">meters</option>
+<option value="feet">feet</option>
+<option value="inches" selected="selected">inches</option>
+<option value="cm">cm</option>
+</select> at each end<div id="fringe_err" class="error"></div></p>
+
+<p class="more" id="more" onclick="toggleMore()">More <img class="flip-vertical" src="arrow.png" width=23 height=14></p>
+
+<div class="hidden" id="extras"><p>Total loom waste: <input id="_loom_waste" onchange="changeOutputsAndStatus('loom_waste', calculateWeft)" value=12 size=2><input id="loom_waste" type="hidden" value=0.33> <select name="loom_waste_unit" id="loom_waste_unit">
+<option value="yards">yards</option>
+<option value="meters">meters</option>
+<option value="feet">feet</option>
+<option value="inches" selected="selected">inches</option>
+<option value="cm">cm</option>
+</select><div id="loom_waste_err" class="error"></div></p>
+
+<p>Add <input id="_percentage_overrun" onchange="changePercentageOverrun(calculateWeft)" value=10 size=2><input id="percentage_overrun" type="hidden" value=1.1>% to allow for draw-in<div id="percentage_overrun_err" class="error"></div></p>
+
+<p>Leave <input id="hemstitch" onchange="changeStatus(calculateWeft)" value=4 size=1> times the fabric width (at each end) for hemstitching<div id="hemstitch_err" class="error"></div></p>
+
+
+<p>Output units (warp): <select name="warp_length_unit" id="warp_length_unit"  onchange="calculateWeft()">
+<option value="yards, feet, and inches" selected="selected">yards, feet, and inches</option>
+<option value="yards">yards</option>
+<option value="meters">meters</option>
+<option value="feet">feet</option>
+<option value="inches">inches</option>
+<option value="cm">cm</option>
+</select><BR />
+Output units (weft): <select name="warp_width_unit" id="warp_width_unit" onchange="calculateWeft()">
+<option value="yards, feet, and inches" selected="selected">yards, feet, and inches</option>
+<option value="yards">yards</option>
+<option value="meters">meters</option>
+<option value="feet">feet</option>
+<option value="inches">inches</option>
+<option value="cm">cm</option>
+</select><BR /><input type="checkbox" name="round_inches" value="round_inches" id="round_inches" onclick="calculateWeft()" checked="checked">Use fractional inches?</p>
+
+<p class="more" onclick="toggleMore()">Less <img src="arrow.png" width=23 height=14></p></div></div></div>
+
+<div class="output-container">
+<div class="outputs">
+<p>You can make something with a width of <span id="output_warp_width" class="num">0 inches</span> and a length of <span id="output_real_length" class="num"></span> (which requires a warp length of <span id="output_warp_length" class="num">0 inches</span>).</p>
+<p id="extra_info" class="extra_info"></p>
+
+<p id="diagnostic"></p></div></div>
+
+
+
+</body></html>
