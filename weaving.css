@@ -50,9 +50,6 @@ input {
     padding: 2px;
 }
 
-.output-matrix table {
-    align: center;
-}
 
 .output-matrix tr:nth-child(even) {
     background-color: #E8DEED;
