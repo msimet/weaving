@@ -354,7 +354,15 @@ function calculateArea() {
                 if (widths.indexOf(width)==-1) break;
             }
         }
-        if (width<=0) { break; }
+        if (width<=0) { 
+            for (var j=i; j<10; j++) {
+                document.getElementById('output_matrix_'+j).className = 'hidden';
+            }
+            break; 
+        }
+        if (document.getElementById('output_matrix_'+i).className == 'hidden') {
+            document.getElementById('output_matrix_'+i).className = '';
+        }
         widths.push(width);
         length = (yardage - width*(dent*(loom_waste + 2*fringe) + 2*hemstitch))/(width*percentage_overrun*(dent+dent_weft));
         warp_length = loom_waste + 2*fringe + length*percentage_overrun;
