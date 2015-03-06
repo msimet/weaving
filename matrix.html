@@ -53,16 +53,15 @@
 <option value="inches">inches</option>
 <option value="cm">cm</option>
 </select><BR />
-Output units (weft): <select name="warp_width_unit" id="warp_width_unit" onchange="printWarpWidthsArray(); calculateArea()">
+Output units (weft): <select name="warp_width_unit" id="warp_width_unit" onchange="calculateArea()">
 <option value="yards, feet, and inches" selected="selected">yards, feet, and inches</option>
 <option value="yards">yards</option>
 <option value="meters">meters</option>
 <option value="feet">feet</option>
 <option value="inches">inches</option>
 <option value="cm">cm</option>
-</select><input id="warp_widths" type="hidden"><BR />
-<input type="checkbox" name="round_inches" value="round_inches" id="round_inches" onclick="calculateArea()" checked="checked">Use fractional inches?<BR />
-<div class="note">Note: changing the weft units changes the suggested list of widths&mdash;for example, "inches" has some widths suitable for a cricket loom, "feet" for a floor loom.</div></p>
+</select><BR />
+<input type="checkbox" name="round_inches" value="round_inches" id="round_inches" onclick="calculateArea()" checked="checked">Use fractional inches?</p>
 <p class="more" id="more" onclick="toggleMore()">More <img class="flip-vertical" src="arrow.png" width=23 height=14></p>
 
 <div class="hidden" id="extras"><p>Total loom waste per warp end: <input id="_loom_waste" onchange="changeOutputsAndStatus('loom_waste', calculateArea)" value=12 size=2><input id="loom_waste" type="hidden" value=0.33> <select name="loom_waste_unit" id="loom_waste_unit">
@@ -104,6 +103,7 @@ Output units (weft): <select name="warp_width_unit" id="warp_width_unit" onchang
 <tr><td id="output_warp_width_8" class="num"></td><td id="output_real_length_8" class="num"></td><td id="output_warp_length_8" class="num"></td></tr>
 <tr><td id="output_warp_width_9" class="num"></td><td id="output_real_length_9" class="num"></td><td id="output_warp_length_9" class="num"></td></tr>
 </table></center>
+<p id="output_error" class="error"></p>
 <p id="extra_info" class="extra_info"></p>
 
 <p id="diagnostic"></p></div></div>

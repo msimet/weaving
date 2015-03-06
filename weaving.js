@@ -73,7 +73,27 @@ function fractional_inch(q) {
         return rounded(q);
     }
 }        
-        
+     
+function round_to_nearest(q, unit, offset) {
+    switch(unit) {
+        case "yards":
+            return 0.1*(Math.floor(10*q)-offset);
+            break;
+        case "meters":
+            return convert(0.1*(Math.floor(q*9.144)-offset), unit);
+            break;
+        case "yards, feet, and inches":
+        case "feet":
+            return convert(0.25*(Math.floor(q*12)-offset), 'feet')
+            break;
+        case "inches":
+            return convert(Math.floor(36*q)-offset, unit);
+            break;
+        case "cm":
+            return convert(Math.floor(q*91.44)-offset, unit);
+            break;
+    }
+}     
 function convert_and_format(q, unit) {
     switch(unit) {
         case "yards":
@@ -95,7 +115,7 @@ function convert_and_format(q, unit) {
             break;
         case "inches":
             if (rounded(q*36.)=='1') {
-                return fixRoundq*36.+" inch";
+                return rounded(q*36.)+" inch";
             } else {
                 return q*36.+" inches";
             }
@@ -310,31 +330,6 @@ function calculateYarn() {
         
 }
 
-function getWarpWidthsArray() {
-    var warp_width_unit = document.getElementById('warp_width_unit').value;
-    if (warp_width_unit=="cm") {
-        widths = [10, 20, 30, 40, 50, 60, 80, 100, 150, 200];
-    } else if (warp_width_unit=="m" || warp_width_unit=="yards") {
-        widths = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 5];
-    } else if (warp_width_unit=="inches") {
-        widths = [4, 5, 6, 8, 10, 12, 15, 18, 24, 30];
-    } else if (warp_width_unit=="feet" || warp_width_unit=="yards, feet, and inches") {
-        widths = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8];
-    }
-    for (var i=0; i<10; i++) {
-        document.getElementById('warp_widths_'+i).value = convert(widths[i], warp_width_unit);
-    }
-}
-
-function printWarpWidthsArray() {
-    getWarpWidthsArray();
-    warp_width_unit = document.getElementById('warp_width_unit').value;
-    for (var i=0; i<10; i++) {
-        width = Number(document.getElementById('warp_widths_'+i).value)
-        document.getElementById('output_warp_width_'+i).innerHTML = convert_and_format(width, warp_width_unit);
-    }    
-}
-    
 function calculateArea() {
     var warp_length, length, loom_waste, fringe, width, percentage_overrun, dent, dent_weft, hemstitch, yardage;
     yardage = Number(document.getElementById('yardage').value);
@@ -346,10 +341,24 @@ function calculateArea() {
     hemstitch = Number(document.getElementById('hemstitch').value);
     warp_length_unit = document.getElementById('warp_length_unit').value;
     warp_width_unit = document.getElementById('warp_width_unit').value;
+    ratios = [1., 1.5, 2., 3., 4., 5., 8., 10., 12., 15.];
+    widths = [];
     for (var i=0; i<10; i++) {
-        width = convert(Number(document.getElementById('warp_widths_'+i).value), warp_width_unit);
-        length = (yardage - width*(dent*(loom_waste + 2*fringe) + 2*hemstitch))/(width*percentage_overrun*(dent+dent_weft))
+        var a = ratios[i]*percentage_overrun*(dent+dent_weft);
+        var b = dent*(loom_waste + 2*fringe) + 2*hemstitch;
+        var discriminant = b*b+4*a*yardage;
+        width = round_to_nearest((-b+Math.sqrt(discriminant))/(2.*a), warp_width_unit, 0);
+        if (widths.indexOf(width)>=0) {
+            for (var offset=0; offset<10; offset++) {
+                width = round_to_nearest((-b+Math.sqrt(discriminant))/(2.*a), warp_width_unit, offset);
+                if (widths.indexOf(width)==-1) break;
+            }
+        }
+        if (width<=0) { break; }
+        widths.push(width);
+        length = (yardage - width*(dent*(loom_waste + 2*fringe) + 2*hemstitch))/(width*percentage_overrun*(dent+dent_weft));
         warp_length = loom_waste + 2*fringe + length*percentage_overrun;
+        document.getElementById('output_warp_width_'+i).innerHTML = convert_and_format(width, warp_width_unit);
         document.getElementById('output_real_length_'+i).innerHTML = convert_and_format(length, warp_length_unit);
         document.getElementById('output_warp_length_'+i).innerHTML = convert_and_format(warp_length, warp_length_unit);
     }    
@@ -375,9 +384,6 @@ function calculateAll(func) {
     validateNumber(document.getElementById('hemstitch').value, 'hemstitch_err');
     validateNumber(document.getElementById('percentage_overrun').value, 'percentage_overrun_err');
     toggleDentWeft(blankfunc);
-    if (func==calculateArea) {
-        printWarpWidthsArray();
-    }
     try {
         changeStatus(func);
     }
