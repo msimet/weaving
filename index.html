@@ -39,7 +39,7 @@
 <option value="cm">cm</option>
 </select><input type="checkbox" name="use_two_dents" value="use_two_dents" id="use_two_dents" onclick="toggleDentWeft(calculateWarp)"><span style="font-size: smaller">Different for weft?</span> <div id="dent_err" class="error"></div></p>
 
-<p id="dent_weft_par" class="hidden"><input id="_dent_weft" onchange="changeInverseOutputs('dent_weft', calculateWarp)" value=8 size=1><input id="dent_weft" type="hidden" value=8> weft ends per <select name="dent_weft_unit" id="dent_weft_unit" onchange="changeInverseOutputs('dent_weft', calculateWarp)" >
+<p id="dent_weft_par" class="hidden"><input id="_dent_weft" onchange="changeInverseOutputs('dent_weft', calculateWarp)" value=8 size=1><input id="dent_weft" type="hidden" value=8> weft picks per <select name="dent_weft_unit" id="dent_weft_unit" onchange="changeInverseOutputs('dent_weft', calculateWarp)" >
 <option value="yards">yard</option>
 <option value="meters">meter</option>
 <option value="feet">foot</option>
@@ -57,7 +57,7 @@
 
 <p class="more" id="more" onclick="toggleMore()">More <img class="flip-vertical" src="arrow.png" width=23 height=14></p>
 
-<div class="hidden" id="extras"><p>Total loom waste per warp end: <input id="_loom_waste" onchange="changeOutputsAndStatus('loom_waste', calculateWarp)" value=12 size=2><input id="loom_waste" type="hidden" value=0.33> <select name="loom_waste_unit" id="loom_waste_unit" onchange="changeOutputsAndStatus('loom_waste', calculateWarp)">
+<div class="hidden" id="extras"><p>Total loom waste per warp thread: <input id="_loom_waste" onchange="changeOutputsAndStatus('loom_waste', calculateWarp)" value=24 size=2><input id="loom_waste" type="hidden" value=0.67> <select name="loom_waste_unit" id="loom_waste_unit" onchange="changeOutputsAndStatus('loom_waste', calculateWarp)">
 <option value="yards">yards</option>
 <option value="meters">meters</option>
 <option value="feet">feet</option>
@@ -65,7 +65,7 @@
 <option value="cm">cm</option>
 </select><div id="loom_waste_err" class="error"></div></p>
 
-<p>Add <input id="_percentage_overrun" onchange="changePercentageOverrun(calculateWarp)" value=10 size=2><input id="percentage_overrun" type="hidden" value=1.1>% to allow for draw-in<div id="percentage_overrun_err" class="error"></div></p>
+<p>Add <input id="_percentage_overrun" onchange="changePercentageOverrun(calculateWarp)" value=10 size=2><input id="percentage_overrun" type="hidden" value=1.1>% to allow for takeup and shrinkage<div id="percentage_overrun_err" class="error"></div></p>
 
 <p>Leave <input id="hemstitch" onchange="changeStatus(calculateWarp)" value=4 size=1> times the fabric width (at each end) for hemstitching<div id="hemstitch_err" class="error"></div></p>
 
